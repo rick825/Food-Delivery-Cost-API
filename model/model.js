@@ -74,22 +74,10 @@ pricingSchema.statics.getDefaultPrices = function(itemType) {
     }
 };
 
-const lastGeneratedOrganisationIdSchema = new mongoose.Schema({
-    lastNumber: { type: Number, default: 0 }
-});
-
-const lastGeneratedItemIdSchema = new mongoose.Schema({
-    lastNumber: { type: Number, default: 0, description: {
-        type: String,
-        required: true
-    } }
-});
 
 // Export the schemas
 const Organization = mongoose.model('Organization', organizationSchema);
 const Item = mongoose.model('Item', itemSchema);
 const Pricing = mongoose.model('Pricing', pricingSchema);
-const lastGeneratedOrId = mongoose.model('lastGeneratedOrId', lastGeneratedOrganisationIdSchema );
-const lastGeneratedItemId = mongoose.model('lastGeneratedItemId',lastGeneratedItemIdSchema)
 
-module.exports = { Organization, Item, Pricing, lastGeneratedOrId, lastGeneratedItemId };
+module.exports = { Organization, Item, Pricing };
