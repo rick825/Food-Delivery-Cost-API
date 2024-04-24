@@ -2,6 +2,7 @@ const express = require('express');
 const path = require('path');
 const morgan = require("morgan"); 
 const dotenv = require('dotenv');
+const fs = require('fs');
 const app = express();
 
 //env
@@ -25,11 +26,32 @@ const connectDB = require('./db/db');
 connectDB();
 
 
-app.get('/',(req,res)=>{
-  const hostname = req.hostname;
-  console.log(`App listening at http://${hostname}:${port}`);
-   res.send(`Express is Listening to you`);
-})
+app.get('/', (req, res) => {
+ 
+  fs.readFile('swagger.yaml', 'utf8', (err, data) => {
+    if (err) {
+      console.error('Error reading Swagger file:', err);
+      return res.status(500).send('Internal Server Error');
+    }
+    res.setHeader('Content-Type', 'application/json');
+    res.send(data);
+  });
+});
+
+app.get('/swagger.yaml', (req, res) => {
+  const filePath = path.join(__dirname, 'swagger.yaml');
+
+  // Check if the file exists
+  if (!fs.existsSync(filePath)) {
+    return res.status(404).send('Swagger YAML file not found');
+  }
+
+  // Set the content type to YAML
+  res.setHeader('Content-Type', 'application/yaml');
+
+  // Read the YAML file and send it as the response
+  fs.createReadStream(filePath).pipe(res);
+});
 
 
 // route
