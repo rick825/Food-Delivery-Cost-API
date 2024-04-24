@@ -41,15 +41,12 @@ app.get('/', (req, res) => {
 app.get('/swagger.yaml', (req, res) => {
   const filePath = path.join(__dirname, 'swagger.yaml');
 
-  // Check if the file exists
   if (!fs.existsSync(filePath)) {
     return res.status(404).send('Swagger YAML file not found');
   }
 
-  // Set the content type to YAML
   res.setHeader('Content-Type', 'application/yaml');
 
-  // Read the YAML file and send it as the response
   fs.createReadStream(filePath).pipe(res);
 });
 
