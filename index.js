@@ -24,7 +24,6 @@ const connectDB = require('./db/db');
 
 connectDB();
 
-var hostname = '';
 
 app.get('/',(req,res)=>{
   const hostname = req.hostname;
@@ -32,12 +31,6 @@ app.get('/',(req,res)=>{
    res.send(`Express is Listening to you`);
 })
 
-//build
-// app.use(express.static(path.join(__dirname, '../client/build')));
-
-// app.get('/', (req, res) => {
-//   res.sendFile(path.join(__dirname, '../client/build', 'index.html'));
-// });
 
 // route
 app.use("/",require('./routes/routes'));

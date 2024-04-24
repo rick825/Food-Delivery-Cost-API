@@ -1,7 +1,7 @@
 const express = require('express');
 const route  = express.Router();
 const controller = require('../controller/controller');
-const { Organization, Item, lastGeneratedOrId, lastGeneratedItemId, Pricing } = require('../model/model');
+const { Organization, Item, Pricing } = require('../model/model');
 
 //get Organised Data
 route.get('/api/getOrganizationData', async (req, res) => {
