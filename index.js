@@ -24,6 +24,14 @@ const connectDB = require('./db/db');
 
 connectDB();
 
+var hostname = '';
+
+app.get('/',(req,res)=>{
+  const hostname = req.hostname;
+  console.log(`App listening at http://${hostname}:${port}`);
+   res.send(`Express is Listening to you`);
+})
+
 //build
 // app.use(express.static(path.join(__dirname, '../client/build')));
 
@@ -35,5 +43,5 @@ connectDB();
 app.use("/",require('./routes/routes'));
 
 app.listen(port, () => {
-  console.log(`App listening at http://localhost:${port}`);
+  console.log(`App Running on ${port}`);
 });
